@@ -2,6 +2,8 @@
 
 A 50-slide HTML presentation about untype (what it is, how it works, installation, configuration, operation), built on the NBG design system skill and decorated with photorealistic images generated for this purpose.
 
+**Live deck (HTML):** https://biks2013.github.io/untype-s/ — published automatically by GitHub Pages, see [Publishing](#publishing-github-pages).
+
 ## Deliverables
 
 | File | Purpose |
@@ -24,3 +26,11 @@ A 50-slide HTML presentation about untype (what it is, how it works, installatio
 ```
 
 `untype-deck.src.html` is an intermediate file produced by the build.
+
+## Publishing (GitHub Pages)
+
+The HTML deck is published at **https://biks2013.github.io/untype-s/** by the workflow `.github/workflows/deploy-deck.yml` (on the `deck` branch). Every push to `deck` that touches `src/`, `assets/`, `build.sh`, `tools/` or the workflow itself rebuilds `untype-deck.html` from the sources (`./build.sh --no-pdf`) and deploys it as the site's `index.html`; the workflow can also be started by hand from the Actions tab (*Run workflow*). The PDF is not rebuilt by the workflow.
+
+The workflow does not have the `nbg-design` plugin, so it builds with `tools/nbg-design/`, a vendored copy of the plugin's `scripts/` folder (`tools/nbg-design/plugin.json` records the version). After updating the plugin locally, run `tools/sync-nbg-design.sh` and commit the result so the published deck carries the newer editing tools.
+
+Repository settings the workflow relies on (already applied): Pages source = *GitHub Actions*; the `github-pages` environment allows deployments from the `deck` branch in addition to `main`.
