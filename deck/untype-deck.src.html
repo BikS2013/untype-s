@@ -6,18 +6,19 @@
 <title>untype — Voice to text for macOS · Technical deck</title>
 <style>
   :root {
-    --ink: #003841;
-    --teal: #007B85;
-    --bright: #00ADBF;
-    --cyan: #00CFE7;
-    --black: #0A1416;
-    --grey-1: #BEC1BE;
-    --grey-2: #939793;
-    --cream: #F5F8F6;
-    --paper: #FFFFFF;
-    --body: #1A1F22;
-    --sans: "Aptos", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-    --mono: "SF Mono", ui-monospace, Menlo, "JetBrains Mono", Consolas, monospace;
+    /* BikS2013 theme of the nbg-design skill — ink and copper on warm paper */
+    --ink: #1B1D21;
+    --copper: #C8623A;
+    --copper-light: #E08A5E;
+    --amber: #E3A64A;
+    --black: #111316;
+    --grey-1: #C9CCD1;
+    --grey-2: #6E7379;
+    --paper: #F6F3EC;
+    --white: #FFFFFF;
+    --body: #1B1D21;
+    --sans: "Avenir Next", "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; height: 100%; background: var(--black); overflow: hidden; font-family: var(--sans); }
@@ -31,32 +32,32 @@
   /* ---- navigation chrome (outside the slides) ---- */
   #nav { position: fixed; right: 18px; bottom: 14px; display: flex; gap: 6px; align-items: center; z-index: 50; font-family: var(--sans); opacity: 0; transition: opacity .25s ease; pointer-events: none; }
   #nav.show { opacity: 1; pointer-events: auto; }
-  #nav button { border: 0; background: rgba(245,248,246,0.10); color: rgba(245,248,246,0.85); width: 34px; height: 34px; border-radius: 8px; font-size: 16px; cursor: pointer; }
-  #nav button:hover { background: rgba(0,207,231,0.25); }
-  #nav .counter { color: rgba(245,248,246,0.6); font-size: 13px; padding: 0 8px; font-variant-numeric: tabular-nums; }
-  #progress { position: fixed; left: 0; bottom: 0; height: 3px; background: var(--cyan); width: 0; z-index: 50; transition: width .2s ease; }
+  #nav button { border: 0; background: rgba(246,243,236,0.10); color: rgba(246,243,236,0.85); width: 34px; height: 34px; border-radius: 8px; font-size: 16px; cursor: pointer; }
+  #nav button:hover { background: rgba(200,98,58,0.35); }
+  #nav .counter { color: rgba(246,243,236,0.6); font-size: 13px; padding: 0 8px; font-variant-numeric: tabular-nums; }
+  #progress { position: fixed; left: 0; bottom: 0; height: 3px; background: var(--copper-light); width: 0; z-index: 50; transition: width .2s ease; }
 
   /* ---- shared slide primitives (artboard px) ---- */
-  .eyebrow { position: absolute; top: 70px; left: 90px; font-size: 16px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--teal); font-weight: 700; }
+  .eyebrow { position: absolute; top: 70px; left: 90px; font-family: var(--mono); font-size: 15px; letter-spacing: 3px; text-transform: uppercase; color: var(--copper); font-weight: 500; }
   .title { position: absolute; top: 110px; left: 90px; right: 90px; font-size: 56px; font-weight: 300; line-height: 1.05; letter-spacing: -1px; color: var(--ink); text-wrap: balance; }
-  .title em { font-style: italic; font-weight: 400; color: var(--teal); }
-  .rule { position: absolute; top: 290px; left: 90px; width: 60px; height: 3px; background: var(--teal); }
-  .body { position: absolute; top: 340px; left: 90px; right: 90px; font-size: 22px; line-height: 1.55; color: rgba(26,31,34,0.85); }
+  .title em { font-style: italic; font-weight: 400; color: var(--copper); }
+  .rule { position: absolute; top: 290px; left: 90px; width: 120px; height: 0; border-top: 2px dashed var(--copper); }
+  .body { position: absolute; top: 340px; left: 90px; right: 90px; font-size: 22px; line-height: 1.55; color: rgba(27,29,33,0.85); }
   .body p { margin: 0 0 22px; text-wrap: pretty; }
   .body ul { margin: 0; padding-left: 26px; }
   .body li { margin: 0 0 12px; text-wrap: pretty; }
-  .body li::marker { color: var(--bright); }
+  .body li::marker { color: var(--copper); }
   .lead { font-size: 26px; line-height: 1.45; color: var(--ink); }
-  .muted { color: rgba(26,31,34,0.6); }
-  .note { position: absolute; left: 90px; right: 90px; bottom: 110px; font-size: 15px; line-height: 1.4; color: rgba(26,31,34,0.55); }
-  code, .k { font-family: var(--mono); font-size: 0.92em; background: rgba(0,56,65,0.07); color: var(--ink); padding: 2px 7px; border-radius: 5px; white-space: nowrap; }
-  .dark code, .dark .k { background: rgba(255,255,255,0.12); color: var(--cream); }
+  .muted { color: rgba(27,29,33,0.6); }
+  .note { position: absolute; left: 90px; right: 90px; bottom: 110px; font-size: 15px; line-height: 1.4; color: rgba(27,29,33,0.55); }
+  code, .k { font-family: var(--mono); font-size: 0.92em; background: rgba(27,29,33,0.07); color: var(--ink); padding: 2px 7px; border-radius: 5px; white-space: nowrap; }
+  .dark code, .dark .k { background: rgba(255,255,255,0.12); color: var(--paper); }
 
-  .footer { position: absolute; left: 54px; right: 54px; bottom: 36px; display: flex; align-items: center; justify-content: space-between; color: rgba(0,56,65,0.55); font-size: 18px; letter-spacing: .4px; }
+  .footer { position: absolute; left: 54px; right: 54px; bottom: 36px; display: flex; align-items: center; justify-content: space-between; color: rgba(27,29,33,0.55); font-size: 18px; letter-spacing: .4px; }
   .footer .brand { display: flex; align-items: center; gap: 18px; }
   .footer .brand img { height: 28px; width: auto; display: block; }
   .footer .brand span { opacity: .7; }
-  .footer .pg { font-variant-numeric: tabular-nums; font-weight: 600; }
+  .footer .pg { font-family: var(--mono); font-variant-numeric: tabular-nums; font-weight: 500; letter-spacing: 1px; }
   .dark .footer { color: rgba(255,255,255,0.7); }
 
   /* ---- layout helpers ---- */
@@ -64,119 +65,119 @@
   .grid.g2 { grid-template-columns: repeat(2, 1fr); }
   .grid.g3 { grid-template-columns: repeat(3, 1fr); }
   .grid.g4 { grid-template-columns: repeat(4, 1fr); gap: 28px; }
-  .col .n { font-size: 64px; font-weight: 200; color: var(--teal); line-height: 1; letter-spacing: -2px; }
+  .col .n { font-size: 64px; font-weight: 200; color: var(--copper); line-height: 1; letter-spacing: -2px; }
   .col h3 { margin: 22px 0 0; font-size: 26px; font-weight: 600; color: var(--ink); line-height: 1.2; }
-  .col p { margin: 14px 0 0; font-size: 18px; line-height: 1.55; color: rgba(26,31,34,0.78); text-wrap: pretty; }
-  .col ul { margin: 14px 0 0; padding-left: 22px; font-size: 18px; line-height: 1.5; color: rgba(26,31,34,0.78); }
+  .col p { margin: 14px 0 0; font-size: 18px; line-height: 1.55; color: rgba(27,29,33,0.78); text-wrap: pretty; }
+  .col ul { margin: 14px 0 0; padding-left: 22px; font-size: 18px; line-height: 1.5; color: rgba(27,29,33,0.78); }
   .col li { margin-bottom: 8px; }
-  .col li::marker { color: var(--bright); }
+  .col li::marker { color: var(--copper); }
 
-  .card { background: var(--paper); border: 1px solid rgba(0,56,65,0.12); border-radius: 16px; padding: 30px 32px; box-shadow: 0 12px 40px -24px rgba(0,56,65,0.25); }
-  .card.tint { background: var(--cream); border-color: transparent; }
-  .card.ink { background: var(--ink); color: var(--cream); border-color: transparent; }
+  .card { background: var(--white); border: 1px solid rgba(27,29,33,0.12); border-radius: 16px; padding: 30px 32px; box-shadow: 0 12px 40px -24px rgba(27,29,33,0.25); }
+  .card.tint { background: rgba(27,29,33,0.045); border-color: transparent; box-shadow: none; }
+  .card.ink { background: var(--ink); color: var(--paper); border-color: transparent; }
   .card h3 { margin: 0; font-size: 24px; font-weight: 600; color: var(--ink); line-height: 1.2; }
-  .card.ink h3 { color: var(--cyan); }
-  .card p { margin: 12px 0 0; font-size: 18px; line-height: 1.5; color: rgba(26,31,34,0.8); }
-  .card.ink p { color: rgba(245,248,246,0.85); }
-  .card ul { margin: 12px 0 0; padding-left: 22px; font-size: 18px; line-height: 1.5; color: rgba(26,31,34,0.8); }
-  .card.ink ul { color: rgba(245,248,246,0.85); }
+  .card.ink h3 { color: var(--copper-light); }
+  .card p { margin: 12px 0 0; font-size: 18px; line-height: 1.5; color: rgba(27,29,33,0.8); }
+  .card.ink p { color: rgba(246,243,236,0.85); }
+  .card ul { margin: 12px 0 0; padding-left: 22px; font-size: 18px; line-height: 1.5; color: rgba(27,29,33,0.8); }
+  .card.ink ul { color: rgba(246,243,236,0.85); }
   .card li { margin-bottom: 8px; }
-  .card li::marker { color: var(--bright); }
-  .card .tag { display: inline-block; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--teal); font-weight: 700; margin-bottom: 10px; }
-  .card.ink .tag { color: var(--cyan); }
-  .card.ink code { background: rgba(255,255,255,0.14); color: var(--cream); }
+  .card li::marker { color: var(--copper); }
+  .card .tag { display: inline-block; font-family: var(--mono); font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--copper); font-weight: 500; margin-bottom: 10px; }
+  .card.ink .tag { color: var(--copper-light); }
+  .card.ink code { background: rgba(255,255,255,0.14); color: var(--paper); }
 
   .image-right { position: absolute; top: 0; right: 0; width: 760px; height: 1080px; overflow: hidden; background-size: cover; background-position: center; }
-  .image-right::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0) 18%); }
+  .image-right::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(246,243,236,0.35) 0%, rgba(246,243,236,0) 18%); }
   .with-image .title, .with-image .body, .with-image .note { right: 840px; }
   .with-image .grid { right: 840px; }
   .with-image .footer { right: 814px; }
 
   .kv { position: absolute; top: 340px; left: 90px; right: 90px; }
-  .kv .row { display: grid; grid-template-columns: 420px 1fr; gap: 40px; padding: 18px 0; border-bottom: 1px solid rgba(0,56,65,0.12); font-size: 20px; line-height: 1.45; align-items: baseline; }
+  .kv .row { display: grid; grid-template-columns: 420px 1fr; gap: 40px; padding: 18px 0; border-bottom: 1px dashed rgba(27,29,33,0.28); font-size: 20px; line-height: 1.45; align-items: baseline; }
   .kv .row:last-child { border-bottom: 0; }
   .kv .key { font-family: var(--mono); font-size: 18px; color: var(--ink); font-weight: 600; }
-  .kv .val { color: rgba(26,31,34,0.85); }
+  .kv .val { color: rgba(27,29,33,0.85); }
 
   table.t { position: absolute; top: 340px; left: 90px; right: 90px; width: 1740px; border-collapse: collapse; font-size: 19px; line-height: 1.4; }
-  table.t th { text-align: left; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; color: var(--teal); font-weight: 700; padding: 0 18px 14px 0; border-bottom: 2px solid var(--ink); }
-  table.t td { padding: 14px 18px 14px 0; border-bottom: 1px solid rgba(0,56,65,0.12); vertical-align: top; color: rgba(26,31,34,0.85); }
+  table.t th { text-align: left; font-family: var(--mono); font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--copper); font-weight: 500; padding: 0 18px 14px 0; border-bottom: 2px solid var(--ink); }
+  table.t td { padding: 14px 18px 14px 0; border-bottom: 1px solid rgba(27,29,33,0.12); vertical-align: top; color: rgba(27,29,33,0.85); }
   table.t td.k { font-family: var(--mono); font-size: 17px; color: var(--ink); font-weight: 600; background: none; padding-left: 0; white-space: nowrap; }
   table.t.compact td { padding-top: 10px; padding-bottom: 10px; font-size: 17px; }
   table.t.compact td.k { font-size: 15px; }
 
-  pre.code { position: absolute; margin: 0; font-family: var(--mono); font-size: 19px; line-height: 1.6; color: var(--cream); background: var(--ink); border-radius: 16px; padding: 30px 36px; white-space: pre; overflow: hidden; }
-  pre.code .c { color: rgba(245,248,246,0.5); }
-  pre.code .h { color: var(--cyan); }
-  pre.code .g { color: #8BE8C8; }
+  pre.code { position: absolute; margin: 0; font-family: var(--mono); font-size: 19px; line-height: 1.6; color: var(--paper); background: var(--ink); border-radius: 16px; padding: 30px 36px; white-space: pre; overflow: hidden; }
+  pre.code .c { color: rgba(246,243,236,0.5); }
+  pre.code .h { color: var(--copper-light); }
+  pre.code .g { color: var(--amber); }
 
   .tree { font-family: var(--mono); font-size: 19px; line-height: 1.7; color: var(--ink); white-space: pre; }
-  .tree .d { color: var(--teal); font-weight: 600; }
-  .tree .m { color: rgba(26,31,34,0.55); }
+  .tree .d { color: var(--copper); font-weight: 600; }
+  .tree .m { color: rgba(27,29,33,0.55); }
 
-  .pill { display: inline-block; padding: 6px 14px; border-radius: 999px; background: rgba(0,173,191,0.14); color: var(--ink); font-size: 16px; font-weight: 600; letter-spacing: .3px; margin: 0 8px 8px 0; }
-  .pill.on { background: var(--ink); color: var(--cream); }
+  .pill { display: inline-block; padding: 6px 14px; border-radius: 999px; background: rgba(200,98,58,0.14); color: var(--ink); font-size: 16px; font-weight: 600; letter-spacing: .3px; margin: 0 8px 8px 0; }
+  .pill.on { background: var(--ink); color: var(--paper); }
 
-  .callout { position: absolute; left: 90px; right: 90px; bottom: 120px; background: var(--cream); border-left: 6px solid var(--bright); border-radius: 0 14px 14px 0; padding: 22px 30px; font-size: 20px; line-height: 1.5; color: var(--ink); }
-  .callout.warn { border-left-color: var(--ink); background: rgba(0,56,65,0.06); }
+  .callout { position: absolute; left: 90px; right: 90px; bottom: 120px; background: var(--white); border-left: 6px solid var(--copper); border-radius: 0 14px 14px 0; padding: 22px 30px; font-size: 20px; line-height: 1.5; color: var(--ink); }
+  .callout.warn { border-left-color: var(--ink); background: rgba(27,29,33,0.06); }
   .callout strong { font-weight: 700; }
 
   .steps { position: absolute; top: 340px; left: 90px; right: 90px; display: grid; gap: 22px; }
   .step { display: grid; grid-template-columns: 72px 1fr; gap: 24px; align-items: start; }
-  .step .n { width: 56px; height: 56px; border-radius: 50%; background: var(--ink); color: var(--cyan); font-size: 24px; font-weight: 600; display: flex; align-items: center; justify-content: center; }
+  .step .n { width: 56px; height: 56px; border-radius: 50%; background: var(--ink); color: var(--copper-light); font-size: 24px; font-weight: 600; display: flex; align-items: center; justify-content: center; }
   .step h3 { margin: 6px 0 0; font-size: 24px; font-weight: 600; color: var(--ink); }
-  .step p { margin: 6px 0 0; font-size: 18px; line-height: 1.5; color: rgba(26,31,34,0.8); }
+  .step p { margin: 6px 0 0; font-size: 18px; line-height: 1.5; color: rgba(27,29,33,0.8); }
 
   .stat { position: absolute; top: 360px; left: 90px; }
   .stat .big { font-size: 220px; font-weight: 200; letter-spacing: -8px; line-height: .9; color: var(--ink); }
-  .stat .big span { color: var(--bright); }
+  .stat .big span { color: var(--copper); }
   .stat .cap { margin-top: 24px; font-size: 26px; color: var(--ink); max-width: 720px; line-height: 1.3; }
   .stat-list { position: absolute; top: 380px; right: 90px; width: 740px; }
-  .stat-list .row { display: flex; justify-content: space-between; align-items: baseline; padding: 20px 0; border-bottom: 1px solid rgba(0,56,65,0.12); }
-  .stat-list .row span:first-child { font-size: 20px; color: rgba(0,56,65,0.7); }
+  .stat-list .row { display: flex; justify-content: space-between; align-items: baseline; padding: 20px 0; border-bottom: 1px dashed rgba(27,29,33,0.28); }
+  .stat-list .row span:first-child { font-size: 20px; color: rgba(27,29,33,0.7); }
   .stat-list .row span:last-child { font-size: 30px; font-weight: 500; color: var(--ink); font-variant-numeric: tabular-nums; }
 
   /* ---- covers & dividers ---- */
-  .cover { background: var(--black); color: var(--cream); }
+  .cover { background: var(--black); color: var(--paper); }
   .cover .photo { position: absolute; top: 100px; right: 60px; width: 720px; height: 880px; border-radius: 18px; overflow: hidden; background-size: cover; background-position: center; }
   .cover .fade { position: absolute; top: 0; right: 780px; width: 240px; height: 100%; background: linear-gradient(90deg, transparent 0%, var(--black) 100%); }
   .cover .copy { position: absolute; top: 220px; left: 90px; max-width: 940px; }
-  .cover h1 { margin: 0; font-size: 92px; line-height: .95; font-weight: 300; letter-spacing: -1.5px; color: var(--cream); text-wrap: balance; }
-  .cover h1 span { color: var(--cyan); }
+  .cover h1 { margin: 0; font-size: 92px; line-height: .95; font-weight: 300; letter-spacing: -1.5px; color: var(--paper); text-wrap: balance; }
+  .cover h1 span { color: var(--copper-light); }
   .cover .sub { margin-top: 56px; font-size: 28px; font-weight: 400; opacity: .86; line-height: 1.3; max-width: 900px; }
   .cover .meta { margin-top: 80px; display: flex; flex-direction: column; gap: 6px; font-size: 16px; letter-spacing: .4px; opacity: .78; }
   .cover .logo { position: absolute; left: 90px; bottom: 80px; }
   .cover .logo img { height: 56px; width: auto; display: block; }
 
-  .divider { background: var(--ink); color: var(--cream); }
+  .divider { background: var(--ink); color: var(--paper); }
   .divider .photo { position: absolute; top: 100px; right: 60px; width: 1100px; height: 880px; border-radius: 24px; overflow: hidden; background-size: cover; background-position: center; }
-  .divider .num { position: absolute; top: 360px; left: 80px; font-size: 220px; font-weight: 200; line-height: 1; letter-spacing: -8px; color: var(--cyan); }
-  .divider .label { position: absolute; top: 600px; left: 90px; width: 600px; font-size: 64px; font-weight: 300; line-height: 1; letter-spacing: -1px; color: var(--cream); }
-  .divider .cap { position: absolute; top: 700px; left: 90px; width: 600px; font-size: 22px; line-height: 1.4; color: rgba(245,248,246,0.7); }
+  .divider .num { position: absolute; top: 330px; left: 80px; font-size: 220px; font-weight: 200; line-height: 1; letter-spacing: -8px; color: var(--copper-light); }
+  .divider .label { position: absolute; bottom: 390px; left: 90px; width: 640px; font-size: 64px; font-weight: 300; line-height: 1.05; letter-spacing: -1px; color: var(--paper); text-wrap: balance; } /* anchored by its bottom edge: a two-line label (Avenir Next runs wider than Aptos) grows upwards, never into the caption */
+  .divider .cap { position: absolute; top: 712px; left: 90px; width: 600px; font-size: 22px; line-height: 1.4; color: rgba(246,243,236,0.7); }
 
-  .divider-dark { background: var(--ink); color: var(--cream); }
-  .divider-dark .bar { position: absolute; left: 0; top: 0; bottom: 0; width: 12px; background: var(--cyan); }
-  .divider-dark .num { position: absolute; top: 380px; left: 90px; font-size: 260px; font-weight: 200; line-height: 1; letter-spacing: -10px; color: var(--cyan); }
-  .divider-dark .label { position: absolute; top: 410px; left: 580px; right: 90px; font-size: 84px; font-weight: 300; line-height: 1; letter-spacing: -2px; color: var(--cream); text-wrap: balance; }
-  .divider-dark .cap { position: absolute; top: 580px; left: 580px; right: 90px; font-size: 26px; line-height: 1.4; color: rgba(245,248,246,0.7); max-width: 760px; }
+  .divider-dark { background: var(--ink); color: var(--paper); }
+  .divider-dark .bar { position: absolute; left: 0; top: 0; bottom: 0; width: 12px; background: var(--copper-light); }
+  .divider-dark .num { position: absolute; top: 380px; left: 90px; font-size: 260px; font-weight: 200; line-height: 1; letter-spacing: -10px; color: var(--copper-light); }
+  .divider-dark .label { position: absolute; top: 410px; left: 580px; right: 90px; font-size: 84px; font-weight: 300; line-height: 1; letter-spacing: -2px; color: var(--paper); text-wrap: balance; }
+  .divider-dark .cap { position: absolute; top: 580px; left: 580px; right: 90px; font-size: 26px; line-height: 1.4; color: rgba(246,243,236,0.7); max-width: 760px; }
 
-  .bright-bg { background: var(--cream); }
-  .bright-bg .field { position: absolute; right: 0; bottom: 0; width: 720px; height: 720px; background: var(--bright); border-top-left-radius: 24px; }
+  .bright-bg { background: var(--paper); }
+  .bright-bg .field { position: absolute; right: 0; bottom: 0; width: 720px; height: 720px; background: var(--copper); border-top-left-radius: 24px; }
 
   /* ---- pipeline diagram ---- */
   .flow { position: absolute; top: 330px; left: 90px; right: 90px; display: grid; grid-template-columns: repeat(6, 1fr); gap: 18px; align-items: stretch; }
-  .flow .node { background: var(--cream); border-radius: 16px; padding: 22px 22px 24px; position: relative; min-height: 250px; }
-  .flow .node.hot { background: var(--ink); color: var(--cream); }
-  .flow .node .i { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--teal); font-weight: 700; }
-  .flow .node.hot .i { color: var(--cyan); }
+  .flow .node { background: var(--white); border-radius: 16px; padding: 22px 22px 24px; position: relative; min-height: 250px; }
+  .flow .node.hot { background: var(--ink); color: var(--paper); }
+  .flow .node .i { font-family: var(--mono); font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--copper); font-weight: 500; }
+  .flow .node.hot .i { color: var(--copper-light); }
   .flow .node h4 { margin: 10px 0 0; font-size: 22px; font-weight: 600; color: var(--ink); line-height: 1.2; }
-  .flow .node.hot h4 { color: var(--cream); }
-  .flow .node p { margin: 10px 0 0; font-size: 16px; line-height: 1.45; color: rgba(26,31,34,0.75); }
-  .flow .node.hot p { color: rgba(245,248,246,0.8); }
-  .flow .node .t { margin-top: 12px; font-family: var(--mono); font-size: 13px; color: var(--teal); line-height: 1.4; word-break: break-word; }
-  .flow .node.hot .t { color: var(--cyan); }
-  .flow .node.hot code { background: rgba(255,255,255,0.14); color: var(--cream); }
-  .flow .node::after { content: "→"; position: absolute; right: -18px; top: 46%; color: var(--bright); font-size: 26px; font-weight: 700; }
+  .flow .node.hot h4 { color: var(--paper); }
+  .flow .node p { margin: 10px 0 0; font-size: 16px; line-height: 1.45; color: rgba(27,29,33,0.75); }
+  .flow .node.hot p { color: rgba(246,243,236,0.8); }
+  .flow .node .t { margin-top: 12px; font-family: var(--mono); font-size: 13px; color: var(--copper); line-height: 1.4; word-break: break-word; }
+  .flow .node.hot .t { color: var(--copper-light); }
+  .flow .node.hot code { background: rgba(255,255,255,0.14); color: var(--paper); }
+  .flow .node::after { content: "→"; position: absolute; right: -18px; top: 46%; color: var(--copper); font-size: 26px; font-weight: 700; }
   .flow .node:last-child::after { content: none; }
 </style>
 </head>
@@ -191,10 +192,10 @@
     <div class="sub">A Swift-native push-to-talk dictation tool for macOS that streams speech to a realtime STT provider, cleans and translates it with an LLM, and types the result into whatever you have focused.</div>
     <div class="meta">
       <div>Technical walkthrough · what it is, how it works, how to install and configure it</div>
-      <div>Version 0.1.0 · build 7 · September 2026</div>
+      <div>Version 0.1.0 · build 13 · September 2026</div>
     </div>
   </div>
-  <div class="logo"><img src="{{LOGO_KNOCKOUT}}" alt="National Bank of Greece" /></div>
+  <div class="logo"><img src="{{LOGO_KNOCKOUT}}" alt="BikS2013" /></div>
 </section>
 
 <!-- ============================ 02 AGENDA ============================ -->
@@ -207,9 +208,9 @@
     <div class="step"><div class="n">04</div><div><h3>Configuration and moving parts</h3><p>The resolution chain, every setting that matters, prompt files, state files, and the CLI.</p></div></div>
     <div class="step"><div class="n">02</div><div><h3>How it works</h3><p>Hotkey to audio to transcript to LLM to focused input, with the Swift types behind each stage.</p></div></div>
     <div class="step"><div class="n">05</div><div><h3>Operating and troubleshooting</h3><p>The daily loop, the latency log, common symptoms, and the guardrails contributors must respect.</p></div></div>
-    <div class="step"><div class="n">03</div><div><h3>Installation</h3><p>Build, package, sign, notarize, install, and grant the three macOS permissions correctly.</p></div></div>
+    <div class="step"><div class="n">03</div><div><h3>Installation</h3><p>Install from Homebrew or the notarized disk image, or build, sign and notarize it yourself, then grant the three macOS permissions correctly.</p></div></div>
   </div>
-  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="National Bank of Greece" /><span>untype · technical deck</span></div><span class="pg"></span></div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="BikS2013" /><span>untype · technical deck</span></div><span class="pg"></span></div>
 </section>
 
 <!-- ============================ 03 DIVIDER 01 ============================ -->
@@ -218,7 +219,7 @@
   <div class="num">01</div>
   <div class="label">What untype is</div>
   <div class="cap">A single-user macOS tool for dictating into any application, with a voice protocol designed for talking to coding agents.</div>
-  <div class="footer"><div class="brand"><img src="{{LOGO_KNOCKOUT}}" alt="National Bank of Greece" /><span>Section 01</span></div><span class="pg"></span></div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_KNOCKOUT}}" alt="BikS2013" /><span>Section 01</span></div><span class="pg"></span></div>
 </section>
 
 <!-- ============================ 04 THE PROBLEM ============================ -->
@@ -236,7 +237,7 @@
     </ul>
   </div>
   <div class="image-right" style="background-image:url('{{PROBLEM_TYPING}}')"></div>
-  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="National Bank of Greece" /><span>Section 01</span></div><span class="pg"></span></div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="BikS2013" /><span>Section 01</span></div><span class="pg"></span></div>
 </section>
 
 <!-- ============================ 05 WHAT IT DOES ============================ -->
@@ -245,13 +246,13 @@
   <div class="title">Hold a hotkey, speak, release. Clean text appears at the cursor.</div>
   <div class="rule"></div>
   <div class="grid g4">
-    <div class="col"><div class="n">01</div><h3>Push-to-talk</h3><p>A global hotkey (default <code>Control+`</code>) opens the audio gate while held. Release finalizes the turn and delivers the output.</p></div>
+    <div class="col"><div class="n">01</div><h3>Push-to-talk</h3><p>A global hotkey (default <code>Control+`</code>) opens the audio gate while held; release finalizes the turn and delivers the output. Push-to-listen mode toggles instead: press to start, press again to stop.</p></div>
     <div class="col"><div class="n">02</div><h3>Realtime STT</h3><p>Microphone audio streams over WebSocket to Soniox or ElevenLabs. Partials render live; finals drive the protocol.</p></div>
     <div class="col"><div class="n">03</div><h3>Refine and translate</h3><p>An LLM cleans disfluencies and, if enabled, translates between Greek and English in one composite call.</p></div>
     <div class="col"><div class="n">04</div><h3>Focused-input delivery</h3><p>The result is inserted into the focused control of the frontmost app and, optionally, copied to the clipboard.</p></div>
   </div>
   <div class="callout">Two things are treated as non-negotiable: push-to-talk must always work, and processed text must always reach the focused input. Every change is verified against both.</div>
-  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="National Bank of Greece" /><span>Section 01</span></div><span class="pg"></span></div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="BikS2013" /><span>Section 01</span></div><span class="pg"></span></div>
 </section>
 
 <!-- ============================ 06 WHO / USE CASES ============================ -->
@@ -291,28 +292,28 @@
       </ul>
     </div>
   </div>
-  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="National Bank of Greece" /><span>Section 01</span></div><span class="pg"></span></div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="BikS2013" /><span>Section 01</span></div><span class="pg"></span></div>
 </section>
 
 <!-- ============================ 07 KEY NUMBERS ============================ -->
-<section class="slide" style="background:var(--cream)">
+<section class="slide" style="background:var(--white)">
   <div class="eyebrow">01 · At a glance</div>
   <div class="title">The project in numbers.</div>
   <div class="rule"></div>
   <div class="stat">
-    <div class="big"><span>216</span></div>
+    <div class="big"><span>229</span></div>
     <div class="cap">automated Swift Testing tests, all passing at the last recorded run, with zero third-party dependencies.</div>
   </div>
   <div class="stat-list">
     <div class="row"><span>Platform</span><span>macOS 14+</span></div>
     <div class="row"><span>Toolchain</span><span>Swift 6 · SwiftPM</span></div>
-    <div class="row"><span>Source files / lines</span><span>36 · ~19 000</span></div>
+    <div class="row"><span>Source files / lines</span><span>38 · ~20 000</span></div>
     <div class="row"><span>STT providers</span><span>2</span></div>
     <div class="row"><span>LLM providers implemented</span><span>2 of 8 names</span></div>
     <div class="row"><span>Prompt files</span><span>9</span></div>
-    <div class="row"><span>Installed build</span><span>0.1.0 · build 7</span></div>
+    <div class="row"><span>Installed build</span><span>0.1.0 · build 13</span></div>
   </div>
-  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="National Bank of Greece" /><span>Section 01</span></div><span class="pg"></span></div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="BikS2013" /><span>Section 01</span></div><span class="pg"></span></div>
 </section>
 
 <!-- ============================ 08 PRINCIPLES ============================ -->
@@ -326,7 +327,7 @@
     <div class="col"><div class="n">03</div><h3>Guarded core features</h3><p>Push-to-talk and focused-input delivery are protected by explicit guardrails, per-release manual smoke checks, and a latency log that proves delivery worked.</p></div>
   </div>
   <div class="callout warn"><strong>Consequence for operators:</strong> most first-run problems are configuration or permission errors that the tool reports precisely, rather than silent degradations.</div>
-  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="National Bank of Greece" /><span>Section 01</span></div><span class="pg"></span></div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="BikS2013" /><span>Section 01</span></div><span class="pg"></span></div>
 </section>
 
 <!-- ============================ 09 DIVIDER 02 ============================ -->
@@ -335,7 +336,7 @@
   <div class="num">02</div>
   <div class="label">How it works</div>
   <div class="cap">From the key press to the caret: audio capture, streaming transcription, the voice protocol, LLM processing and delivery.</div>
-  <div class="footer"><div class="brand"><img src="{{LOGO_KNOCKOUT}}" alt="National Bank of Greece" /><span>Section 02</span></div><span class="pg"></span></div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_KNOCKOUT}}" alt="BikS2013" /><span>Section 02</span></div><span class="pg"></span></div>
 </section>
 
 <!-- ============================ 10 PIPELINE ============================ -->
@@ -352,7 +353,7 @@
     <div class="node hot"><div class="i">6 · Deliver</div><h4>Focused input and clipboard</h4><p>AX caret insertion, then paste, then Unicode key events; overlay hides 1.2 s later.</p><div class="t">FocusedInputDelivery · MacOSClipboardWriter</div></div>
   </div>
   <div class="note">Each stage is timed into one record of <code>release-latency.jsonl</code>. The whole chain is assembled by <code>UntypeRuntimeFactory</code> into a single <code>TranscriptionSessionRuntime</code>, shared by the CLI and the native UI.</div>
-  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="National Bank of Greece" /><span>Section 02</span></div><span class="pg"></span></div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="BikS2013" /><span>Section 02</span></div><span class="pg"></span></div>
 </section>
 
 <!-- ============================ 11 PTT LIFECYCLE ============================ -->
@@ -362,12 +363,12 @@
   <div class="rule"></div>
   <div class="steps" style="right:840px; gap:18px">
     <div class="step"><div class="n">1</div><div><h3>Warm session</h3><p>Enabling push-to-talk starts a hotkey-owned runtime with the gate closed. Idle sessions are recycled every 5 minutes.</p></div></div>
-    <div class="step"><div class="n">2</div><div><h3>Press</h3><p>Capture state becomes <code>recording</code>, the target app is remembered, the overlay appears and the gate opens. Key auto-repeat is ignored.</p></div></div>
+    <div class="step"><div class="n">2</div><div><h3>Press</h3><p>Capture state becomes <code>recording</code>, the target app is remembered, the overlay appears and the gate opens. Key auto-repeat is ignored. In push-to-listen mode the first press starts and the next press stops; releases are ignored.</p></div></div>
     <div class="step"><div class="n">3</div><div><h3>Release</h3><p>The gate closes, the provider is asked to commit, and the runtime waits up to 1.5 s for final text. Quick Close submits the latest partial immediately instead.</p></div></div>
     <div class="step"><div class="n">4</div><div><h3>Submit and restart</h3><p>Pending text drains through the state machine, output is delivered, and a fresh warm session starts for the next press.</p></div></div>
   </div>
   <div class="image-right" style="background-image:url('{{HOTKEY_PRESS}}')"></div>
-  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="National Bank of Greece" /><span>Section 02</span></div><span class="pg"></span></div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="BikS2013" /><span>Section 02</span></div><span class="pg"></span></div>
 </section>
 
 <!-- ============================ 12 HOTKEY LAYERS ============================ -->
@@ -376,12 +377,12 @@
   <div class="title">Three detection layers share one press/release state.</div>
   <div class="rule"></div>
   <div class="grid g3">
-    <div class="card ink"><div class="tag">Primary</div><h3>Quartz CGEvent tap</h3><p>System-wide key down and key up, with suppression of the hotkey so it never reaches the frontmost app. Needs Accessibility and Input Monitoring.</p><p class="muted" style="color:rgba(245,248,246,0.6)">Status: <code>global event tap ready</code></p></div>
+    <div class="card ink"><div class="tag">Primary</div><h3>Quartz CGEvent tap</h3><p>System-wide key down and key up, with suppression of the hotkey so it never reaches the frontmost app. Needs Accessibility and Input Monitoring.</p><p class="muted" style="color:rgba(246,243,236,0.6)">Status: <code>global event tap ready</code></p></div>
     <div class="card"><div class="tag">Fallback 1</div><h3>Carbon RegisterEventHotKey</h3><p>A global hotkey registration that fires reliably even when the event tap cannot be installed.</p><p class="muted">Status: <code>carbon global hotkey ready; event tap unavailable</code></p></div>
     <div class="card"><div class="tag">Fallback 2</div><h3>AppKit NSEvent monitors</h3><p>Local and global monitors as the last resort; release may be blocked, so the UI asks the user to press again.</p><p class="muted">Status: <code>fallback monitor active</code></p></div>
   </div>
   <div class="callout">The hotkey monitor is reconfigured only when the hotkey string or its enabled flag changes, so a settings write mid-press can no longer reset a live session. A UI "Push to Talk" button drives the same path when keyboard hooks are unavailable.</div>
-  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="National Bank of Greece" /><span>Section 02</span></div><span class="pg"></span></div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="BikS2013" /><span>Section 02</span></div><span class="pg"></span></div>
 </section>
 
 <!-- ============================ 13 AUDIO ============================ -->
@@ -408,7 +409,7 @@
     </div>
   </div>
   <div class="callout">Diagnostics trace the order explicitly: starting microphone capture, microphone capture started, connecting realtime stream, realtime stream connected.</div>
-  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="National Bank of Greece" /><span>Section 02</span></div><span class="pg"></span></div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="BikS2013" /><span>Section 02</span></div><span class="pg"></span></div>
 </section>
 
 <!-- ============================ 14 STT PROVIDERS ============================ -->
@@ -437,7 +438,7 @@
     </div>
   </div>
   <div class="note">Both adapters sit behind a mockable <code>RealtimeWebSocketClient</code> and are frame-level tested; live behaviour is covered by manual smoke procedures under <code>test_scripts/</code>.</div>
-  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="National Bank of Greece" /><span>Section 02</span></div><span class="pg"></span></div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="BikS2013" /><span>Section 02</span></div><span class="pg"></span></div>
 </section>
 
 <!-- ============================ 15 PROTOCOL ============================ -->
@@ -452,7 +453,7 @@
     <div class="row"><span class="key">Interaction modes</span><span class="val"><code>dictation</code> (default), <code>agent-protocol</code> (JSONL events on stdout, no human status lines) and <code>hybrid</code> (both; the CLI requires <code>--protocol-output</code>).</span></div>
     <div class="row"><span class="key">Events</span><span class="val">Protocol <code>untype.voice-agent.v1</code>: session started and ended, state and status, section submitted, processed and cancelled, streaming progress, clipboard copied, input sent, warnings. Every event has a monotonic <code>seq</code>.</span></div>
   </div>
-  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="National Bank of Greece" /><span>Section 02</span></div><span class="pg"></span></div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="BikS2013" /><span>Section 02</span></div><span class="pg"></span></div>
 </section>
 
 <!-- ============================ 16 OPERATORS ============================ -->
@@ -471,7 +472,7 @@
     </tbody>
   </table>
   <div class="callout">Operators default to off unless configured; when a flag is not set, the values persisted in <code>state.json</code> at the last shutdown apply. If an operator is on but its LLM is not configured, the section is delivered unprocessed with a warning.</div>
-  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="National Bank of Greece" /><span>Section 02</span></div><span class="pg"></span></div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="BikS2013" /><span>Section 02</span></div><span class="pg"></span></div>
 </section>
 
 <!-- ============================ 17 REFINEMENT ============================ -->
@@ -489,7 +490,7 @@
     </ul>
   </div>
   <div class="image-right" style="background-image:url('{{LLM_NETWORK}}')"></div>
-  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="National Bank of Greece" /><span>Section 02</span></div><span class="pg"></span></div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="BikS2013" /><span>Section 02</span></div><span class="pg"></span></div>
 </section>
 
 <!-- ============================ 18 TRANSLATION ============================ -->
@@ -503,7 +504,7 @@
     <div class="card tint"><div class="tag">Prompts</div><p>System prompt from file 002, user template from file 003 with <code>{target_language}</code> and <code>{text}</code>. Technical terms, file names, command names and code identifiers are preserved verbatim.</p></div>
   </div>
   <div class="callout">Translation only runs for sections whose <code>translate</code> operator is on. With the operator off, the refinement prompt explicitly forbids any language change, so refine-only sections can never come back translated.</div>
-  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="National Bank of Greece" /><span>Section 02</span></div><span class="pg"></span></div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="BikS2013" /><span>Section 02</span></div><span class="pg"></span></div>
 </section>
 
 <!-- ============================ 19 COMPOSITE ============================ -->
@@ -537,7 +538,7 @@ Translation prompt:
 {file 009 with {target_language} filled}
 
 Return only JSON with refined_text and translated_text.</pre>
-  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="National Bank of Greece" /><span>Section 02</span></div><span class="pg"></span></div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="BikS2013" /><span>Section 02</span></div><span class="pg"></span></div>
 </section>
 
 <!-- ============================ 20 STREAMING & OVERLAY ============================ -->
@@ -555,7 +556,7 @@ Return only JSON with refined_text and translated_text.</pre>
     </ul>
   </div>
   <div class="image-right" style="background-image:url('{{UI_OVERVIEW}}')"></div>
-  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="National Bank of Greece" /><span>Section 02</span></div><span class="pg"></span></div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="BikS2013" /><span>Section 02</span></div><span class="pg"></span></div>
 </section>
 
 <!-- ============================ 21 DELIVERY ============================ -->
@@ -570,7 +571,7 @@ Return only JSON with refined_text and translated_text.</pre>
   </div>
   <div class="callout" style="right:840px; bottom:100px">UI sessions deliver in-process so the TCC grant belongs to <code>untype.app</code>. CLI runs spawn <code>untype-input-helper</code> with the text on stdin, never in argv. If untype itself is frontmost, the last external app is re-activated first.</div>
   <div class="image-right" style="background-image:url('{{TEXT_DELIVERY}}')"></div>
-  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="National Bank of Greece" /><span>Section 02</span></div><span class="pg"></span></div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="BikS2013" /><span>Section 02</span></div><span class="pg"></span></div>
 </section>
 
 <!-- ============================ 22 LATENCY RECORD ============================ -->
@@ -604,7 +605,7 @@ Return only JSON with refined_text and translated_text.</pre>
       <li>Opt-in via <code>UNTYPE_RELEASE_LATENCY_LOG</code>; never contains transcript text.</li>
     </ul>
   </div>
-  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="National Bank of Greece" /><span>Section 02</span></div><span class="pg"></span></div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="BikS2013" /><span>Section 02</span></div><span class="pg"></span></div>
 </section>
 
 <!-- ============================ 23 PACKAGE LAYOUT ============================ -->
@@ -615,21 +616,21 @@ Return only JSON with refined_text and translated_text.</pre>
   <div class="tree" style="position:absolute; top:330px; left:90px; font-size:18px"><span class="d">Package.swift</span>                <span class="m">swift-tools-version 6.0, macOS 14, no dependencies</span>
 <span class="d">Sources/untype/</span>              <span class="m">@main: UI launch or CLI command</span>
 <span class="d">Sources/untype-input-helper/</span> <span class="m">stdin text → focused input, JSON result</span>
-<span class="d">Sources/UntypeCore/</span>          <span class="m">36 files, all logic</span>
-  ConfigResolver · EnvChain · Dotenv · ResolvedConfig · PromptConfig
+<span class="d">Sources/UntypeCore/</span>          <span class="m">38 files, all logic</span>
+  ConfigResolver · EnvChain · Dotenv · DotenvEditor · EnvTemplate · PromptConfig
   TranscriptionSessionRuntime · UntypeRuntimeFactory
   AVFoundationAudioSource · PCM16MonoConverter
   SonioxTranscriber · ElevenLabsTranscriber
   VoiceAgentProtocolController · ProtocolStateMachine · ProtocolMarkerMatcher
   LLMRefiners · ProtocolJsonlWriter · ReleaseLatencyLogger
   FocusedInputDelivery · FocusedInputHelper · MacOSClipboardWriter
-  NativeUntypeUILauncher (3 678 lines) · UntypeUISettings · UntypeOverlayLayout
-<span class="d">Tests/UntypeCoreTests/</span>       <span class="m">15 files, 216 tests</span>
-<span class="d">scripts/package-macos-app.sh</span> <span class="m">build, sign, notarize, staple, DMG</span>
+  NativeUntypeUILauncher (4 125 lines) · UntypeUISettings · UntypeOverlayLayout
+<span class="d">Tests/UntypeCoreTests/</span>       <span class="m">16 files, 229 tests</span>
+<span class="d">scripts/</span>                     <span class="m">package-macos-app.sh, update-homebrew-cask.sh</span>
 <span class="d">packaging/macos/</span>             <span class="m">icon, entitlements, INSTALL.txt</span>
 <span class="d">docs/design/ · docs/reference/ · docs/research/</span></div>
   <div class="image-right" style="background-image:url('{{MODULE_LAYOUT}}')"></div>
-  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="National Bank of Greece" /><span>Section 02</span></div><span class="pg"></span></div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="BikS2013" /><span>Section 02</span></div><span class="pg"></span></div>
 </section>
 
 <!-- ============================ 24 NATIVE UI ============================ -->
@@ -639,13 +640,13 @@ Return only JSON with refined_text and translated_text.</pre>
   <div class="rule"></div>
   <div class="kv" style="top:330px">
     <div class="row"><span class="key">Layout</span><span class="val">Three-column split view: Monitor sidebar (Transcript, History, Events plus a status card), centre work area, trailing inspector. Default 1180×760, minimum 860×620, compact mini mode 440×260 with <code>⌥⌘M</code>.</span></div>
-    <div class="row"><span class="key">Titlebar strip</span><span class="val">Record or stop (<code>⌘R</code>), refresh, appearance, inspector toggle (<code>⌘\</code>), compact mode, permission setup (<code>⌥⌘P</code>). Clicking the brand mark toggles the sidebar.</span></div>
-    <div class="row"><span class="key">Inspector sections</span><span class="val">Session, Provider, Protocol, Operators, Refinement (LLM), Push to talk, Permissions, Credentials. Credentials show the key name, source tier and expiry, never the value.</span></div>
+    <div class="row"><span class="key">Titlebar strip</span><span class="val">Record or stop (<code>⌘R</code>), then the hotkey-mode switch (on: push-to-talk, off: push-to-listen), refresh, permission setup (<code>⌥⌘P</code>), appearance, inspector toggle (<code>⌘\</code>), compact mode. Clicking the brand mark toggles the sidebar.</span></div>
+    <div class="row"><span class="key">Inspector sections</span><span class="val">Session (with <em>Edit keys…</em> in its header), Provider, Protocol, Operators, Refinement (LLM), Push to talk with a <em>Hold to talk</em> row, Permissions, Credentials. Credentials show the key name, source tier and expiry, never the value; the editor writes them to the user <code>.env</code>.</span></div>
     <div class="row"><span class="key">Locking</span><span class="val">Provider, model, languages, mode, policy, LLM and push-to-talk settings lock while a session is active; the four operator switches stay live and route to the controller.</span></div>
     <div class="row"><span class="key">Monitor tabs</span><span class="val">Transcript: live partial, raw and processed bubbles, waveform, copy and save. History: session-local turns in memory. Events: bounded log with filters all, warnings, provider, audio, hotkey, protocol.</span></div>
-    <div class="row"><span class="key">Onboarding</span><span class="val">A checklist sheet with deep links to Microphone, Accessibility and Input Monitoring settings appears when something is missing; skipping suppresses it for 24 hours.</span></div>
+    <div class="row"><span class="key">Onboarding</span><span class="val">A scrollable welcome sheet with status cards, a step-by-step guide for Microphone, Accessibility and Input Monitoring (expanded while one is missing), deep links, and a <em>Set keys…</em> button that opens the credentials editor; skipping suppresses it for 24 hours.</span></div>
   </div>
-  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="National Bank of Greece" /><span>Section 02</span></div><span class="pg"></span></div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="BikS2013" /><span>Section 02</span></div><span class="pg"></span></div>
 </section>
 
 <!-- ============================ 25 DIVIDER 03 ============================ -->
@@ -653,8 +654,21 @@ Return only JSON with refined_text and translated_text.</pre>
   <div class="photo" style="background-image:url('{{INSTALL_TERMINAL}}')"></div>
   <div class="num">03</div>
   <div class="label">Installation</div>
-  <div class="cap">Build from source, package a signed and notarized bundle, install it, and grant the permissions that make the hotkey and delivery work.</div>
-  <div class="footer"><div class="brand"><img src="{{LOGO_KNOCKOUT}}" alt="National Bank of Greece" /><span>Section 03</span></div><span class="pg"></span></div>
+  <div class="cap">Install it with Homebrew or from the notarized disk image, or build and package it yourself, then grant the permissions that make the hotkey and delivery work.</div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_KNOCKOUT}}" alt="BikS2013" /><span>Section 03</span></div><span class="pg"></span></div>
+</section>
+
+<!-- ============================ 25b INSTALL (END USERS) ============================ -->
+<section class="slide">
+  <div class="eyebrow">03 · Install as a user</div>
+  <div class="title">Two ways in, no toolchain required.</div>
+  <div class="rule"></div>
+  <div class="grid g2" style="gap:40px 60px">
+    <div class="card ink"><div class="tag">Homebrew</div><h3>Tap and install the cask</h3><p><code>brew tap BikS2013/untype</code> then <code>brew install --cask untype</code>; later <code>brew upgrade --cask untype</code>. The tap <code>BikS2013/homebrew-untype</code> points at the latest GitHub release asset and is regenerated after every release with <code>scripts/update-homebrew-cask.sh</code>.</p></div>
+    <div class="card"><div class="tag">GitHub release</div><h3>Download the notarized disk image</h3><p>Every build is a release tagged <code>v0.1.0-b&lt;N&gt;</code> (first one: <code>v0.1.0-b8</code>) with <code>untype-0.1.0.dmg</code>, the notarized zip and <code>SHA256SUMS</code>. The always-newest link is <code>releases/latest/download/untype-0.1.0.dmg</code>. Open the image, drag untype to Applications, follow <code>INSTALL.txt</code>.</p></div>
+  </div>
+  <div class="callout">Both paths install the same Developer ID signed and notarized bundle, so macOS opens it without a Gatekeeper warning and permissions survive upgrades. Building from source, next, is only needed to release a new build.</div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="BikS2013" /><span>Section 03</span></div><span class="pg"></span></div>
 </section>
 
 <!-- ============================ 26 PREREQUISITES ============================ -->
@@ -668,7 +682,7 @@ Return only JSON with refined_text and translated_text.</pre>
     <div class="card tint"><div class="tag">Release only</div><ul><li>Apple Developer Program membership.</li><li>A Developer ID Application certificate with its private key in the login keychain.</li><li>An App Store Connect API key stored as the <code>untype-notary</code> notarytool profile.</li></ul></div>
   </div>
   <div class="callout">Check available signing identities with <code>security find-identity -v -p codesigning</code> before packaging.</div>
-  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="National Bank of Greece" /><span>Section 03</span></div><span class="pg"></span></div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="BikS2013" /><span>Section 03</span></div><span class="pg"></span></div>
 </section>
 
 <!-- ============================ 27 BUILD ============================ -->
@@ -699,7 +713,7 @@ swift test
       <li>Exit codes: 0 ok, 1 unknown, 2 configuration, 3 microphone, 4 provider auth, 5 provider network, 6 provider protocol.</li>
     </ul>
   </div>
-  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="National Bank of Greece" /><span>Section 03</span></div><span class="pg"></span></div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="BikS2013" /><span>Section 03</span></div><span class="pg"></span></div>
 </section>
 
 <!-- ============================ 28 PACKAGING ============================ -->
@@ -708,7 +722,7 @@ swift test
   <div class="title">One script builds, tests, signs, notarizes and staples.</div>
   <div class="rule"></div>
   <pre class="code" style="top:330px; left:90px; width:1000px; height:250px; font-size:18px">scripts/package-macos-app.sh \
-  --bundle-id com.local.untype --version 0.1.0 --build 7 \
+  --bundle-id com.local.untype --version 0.1.0 --build 13 \
   --sign-identity "Developer ID Application: GEORGIOS MARINOS (9F9H8NCAUB)" \
   --notary-profile untype-notary \
   --dmg</pre>
@@ -717,7 +731,7 @@ swift test
     <ul>
       <li><code>untype.app</code></li>
       <li><code>untype-0.1.0.zip</code> and <code>-notarized.zip</code></li>
-      <li><code>untype-0.1.0.dmg</code> (3.7 MB, distribute this one)</li>
+      <li><code>untype-0.1.0.dmg</code> (3.7 MB, distribute this one) and <code>SHA256SUMS</code></li>
     </ul>
   </div>
   <table class="t compact" style="top:620px">
@@ -730,7 +744,7 @@ swift test
       <tr><td class="k">--skip-tests / --skip-build / --unsigned</td><td>Development shortcuts. <code>--unsigned</code> is for local packaging only, never for a deploy.</td></tr>
     </tbody>
   </table>
-  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="National Bank of Greece" /><span>Section 03</span></div><span class="pg"></span></div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="BikS2013" /><span>Section 03</span></div><span class="pg"></span></div>
 </section>
 
 <!-- ============================ 29 SIGNING ============================ -->
@@ -749,7 +763,7 @@ swift test
   </div>
   <div class="note" style="right:840px">Certificate dates to plan around: Developer ID expires 2027-02-01, Apple Development expires 2027-08-15. Each renewal costs one permission re-grant.</div>
   <div class="image-right" style="background-image:url('{{SIGNING_SEAL}}')"></div>
-  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="National Bank of Greece" /><span>Section 03</span></div><span class="pg"></span></div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="BikS2013" /><span>Section 03</span></div><span class="pg"></span></div>
 </section>
 
 <!-- ============================ 30 INSTALL ============================ -->
@@ -761,7 +775,7 @@ swift test
 osascript -e 'tell application "untype" to quit'
 
 <span class="c"># 2. keep the previous bundle</span>
-mv /Applications/untype.app .build/deploy/untype.app.build6-backup
+mv /Applications/untype.app .build/deploy/untype.app.build12-backup
 
 <span class="c"># 3. copy the new bundle and verify it</span>
 ditto .build/deploy/untype.app /Applications/untype.app
@@ -774,12 +788,12 @@ ln -sf /Applications/untype.app/Contents/MacOS/untype ~/.local/bin/untype</pre>
   <div class="body" style="left:1190px; right:90px; top:330px; font-size:19px">
     <ul>
       <li>Install location is <code>/Applications/untype.app</code>; the CLI is the same binary through a symlink.</li>
-      <li>Distribute only the DMG with its SHA-256. Do not share a bare app or zip.</li>
+      <li>Publish the DMG, the notarized zip and <code>SHA256SUMS</code> as a GitHub Release tagged <code>v0.1.0-b&lt;N&gt;</code>, then regenerate the Homebrew cask. Never share a bare app.</li>
       <li>The whole release pipeline takes 5 to 10 minutes; each notarization 2 to 5.</li>
       <li>After every redeploy, perform one push-to-talk release into a text field and confirm <code>focused_input.ok=true</code> in the latency log.</li>
     </ul>
   </div>
-  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="National Bank of Greece" /><span>Section 03</span></div><span class="pg"></span></div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="BikS2013" /><span>Section 03</span></div><span class="pg"></span></div>
 </section>
 
 <!-- ============================ 31 PERMISSIONS ============================ -->
@@ -794,7 +808,7 @@ ln -sf /Applications/untype.app/Contents/MacOS/untype ~/.local/bin/untype</pre>
   </div>
   <div class="callout" style="right:840px; bottom:100px">Quit and relaunch after changing any permission. The UI offers deep links into System Settings, and <code>⌥⌘P</code> opens the permission setup sheet on demand.</div>
   <div class="image-right" style="background-image:url('{{PERMISSIONS_KEYS}}')"></div>
-  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="National Bank of Greece" /><span>Section 03</span></div><span class="pg"></span></div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="BikS2013" /><span>Section 03</span></div><span class="pg"></span></div>
 </section>
 
 <!-- ============================ 32 RECOVERY ============================ -->
@@ -818,7 +832,7 @@ open -a /Applications/untype.app
 <span class="c"># hotkey dead after install? remove the stale entry under</span>
 <span class="c"># Input Monitoring, re-add the app, relaunch</span></pre>
   <div class="callout warn"><strong>Never reset Input Monitoring when only Accessibility is broken.</strong> That removes the grant the event tap depends on and breaks push-to-talk, which then needs its own re-grant.</div>
-  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="National Bank of Greece" /><span>Section 03</span></div><span class="pg"></span></div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="BikS2013" /><span>Section 03</span></div><span class="pg"></span></div>
 </section>
 
 <!-- ============================ 33 FIRST RUN ============================ -->
@@ -828,12 +842,12 @@ open -a /Applications/untype.app
   <div class="rule"></div>
   <div class="steps" style="gap:16px">
     <div class="step"><div class="n">1</div><div><h3>Launch from Applications or Spotlight</h3><p>The onboarding checklist appears whenever microphone, accessibility or credentials are not ready.</p></div></div>
-    <div class="step"><div class="n">2</div><div><h3>Create <code>~/.tool-agents/untype/.env</code></h3><p>At least <code>SONIOX_API_KEY=…</code> or <code>ELEVENLABS_API_KEY=…</code>; add Azure OpenAI or Google variables if refinement is on. The folder is created with mode 0700 and the file must be 0600.</p></div></div>
+    <div class="step"><div class="n">2</div><div><h3>Set the provider keys</h3><p><em>Set keys…</em> on the welcome screen (or Settings › Credentials › <em>Edit keys…</em>) writes <code>SONIOX_API_KEY</code> or <code>ELEVENLABS_API_KEY</code>, and the Azure OpenAI or Google variables if refinement is on, into <code>~/.tool-agents/untype/.env</code>. Editing by hand works too: the first session start provisions that file as a fully commented template (folder 0700, file 0600).</p></div></div>
     <div class="step"><div class="n">3</div><div><h3>Let the prompt files provision themselves</h3><p>On first start the nine prompt files are written with their defaults under <code>~/.tool-agents/untype/prompts/</code>.</p></div></div>
-    <div class="step"><div class="n">4</div><div><h3>Grant permissions, enable push-to-talk, set the hotkey</h3><p>Then hold the hotkey, speak, release, and watch the text appear in the focused field.</p></div></div>
+    <div class="step"><div class="n">4</div><div><h3>Grant permissions, pick the hotkey mode, set the hotkey</h3><p>The welcome screen explains each permission; the top-bar switch selects push-to-talk (hold) or push-to-listen (press, press again). Then speak and watch the text appear in the focused field.</p></div></div>
     <div class="step"><div class="n">5</div><div><h3>Verify</h3><p>Turn on the latency log and confirm the newest record reads <code>delivered_to_focused_input</code> with <code>focused_input.ok=true</code>.</p></div></div>
   </div>
-  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="National Bank of Greece" /><span>Section 03</span></div><span class="pg"></span></div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="BikS2013" /><span>Section 03</span></div><span class="pg"></span></div>
 </section>
 
 <!-- ============================ 34 DIVIDER 04 ============================ -->
@@ -842,7 +856,7 @@ open -a /Applications/untype.app
   <div class="num">04</div>
   <div class="label">Configuration and moving parts</div>
   <div class="cap">Where every setting lives, how the four tiers resolve, and what the state, prompt and log files contain.</div>
-  <div class="footer"><div class="brand"><img src="{{LOGO_KNOCKOUT}}" alt="National Bank of Greece" /><span>Section 04</span></div><span class="pg"></span></div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_KNOCKOUT}}" alt="BikS2013" /><span>Section 04</span></div><span class="pg"></span></div>
 </section>
 
 <!-- ============================ 35 RESOLUTION CHAIN ============================ -->
@@ -853,14 +867,14 @@ open -a /Applications/untype.app
   <div class="flow" style="grid-template-columns:repeat(4,1fr); gap:40px">
     <div class="node hot"><div class="i">Tier 1 · highest</div><h4>CLI flag</h4><p>Explicit arguments such as <code>--stt-provider</code>. UI settings are converted into the equivalent flags, so what the UI sets behaves like a flag.</p></div>
     <div class="node"><div class="i">Tier 2</div><h4>Local <code>.env</code></h4><p>The <code>.env</code> file in the current working directory, useful for per-project overrides when running the CLI.</p></div>
-    <div class="node"><div class="i">Tier 3</div><h4>User <code>.env</code></h4><p><code>~/.tool-agents/untype/.env</code>: the normal home of API keys and provider settings for the app bundle.</p></div>
+    <div class="node"><div class="i">Tier 3</div><h4>User <code>.env</code></h4><p><code>~/.tool-agents/untype/.env</code>: the normal home of API keys and provider settings for the app bundle. Provisioned as a commented template on first start; the UI credentials editor writes here.</p></div>
     <div class="node"><div class="i">Tier 4 · lowest</div><h4>Shell environment</h4><p>Exported variables of the launching shell. The UI shows which tier supplied the API key.</p></div>
   </div>
   <div class="grid g2" style="top:650px; gap:30px 60px">
     <div class="card tint"><div class="tag">Parser rules</div><p>Comments and blank lines skipped, <code>export</code> prefix stripped, quotes handled, inline comments removed, last duplicate wins, blank values fall through to the next tier. Booleans accept true/false, yes/no, on/off, 1/0.</p></div>
     <div class="card ink"><div class="tag">No-fallback rule</div><p>A required value that is missing everywhere raises a typed error naming the variable and the four places it may be set. Nothing is defaulted silently, and startup stops with exit code 2.</p></div>
   </div>
-  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="National Bank of Greece" /><span>Section 04</span></div><span class="pg"></span></div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="BikS2013" /><span>Section 04</span></div><span class="pg"></span></div>
 </section>
 
 <!-- ============================ 36 FOLDER MAP ============================ -->
@@ -869,7 +883,7 @@ open -a /Applications/untype.app
   <div class="title">Everything user-specific sits in one folder.</div>
   <div class="rule"></div>
   <div class="tree" style="position:absolute; top:330px; left:90px; width:900px"><span class="d">~/.tool-agents/untype/</span>              <span class="m">mode 0700</span>
-├── <span class="d">.env</span>                         <span class="m">API keys and provider settings, 0600</span>
+├── <span class="d">.env</span>                         <span class="m">keys and settings, 0600 (template)</span>
 ├── <span class="d">prompts/</span>
 │   ├── 001-refinement-system.txt
 │   ├── 002-translation-system.txt
@@ -881,7 +895,7 @@ open -a /Applications/untype.app
 │   ├── 008-composite-refinement-template.txt
 │   └── 009-composite-translation-template.txt
 ├── <span class="d">state.json</span>                   <span class="m">operators + policy, saved at shutdown</span>
-├── <span class="d">ui-state.json</span>                <span class="m">window, tabs, hotkey, settings</span>
+├── <span class="d">ui-state.json</span>                <span class="m">window, tabs, hotkey and its mode, settings</span>
 ├── <span class="d">release-latency.jsonl</span>        <span class="m">opt-in per-release records</span>
 └── <span class="d">AuthKey_&lt;KEYID&gt;.p8</span>           <span class="m">App Store Connect key for notarization</span></div>
   <div class="body" style="left:1050px; right:90px; top:330px; font-size:20px">
@@ -893,7 +907,7 @@ open -a /Applications/untype.app
       <li>A legacy <code>~/.tool-agents/mic-tool-ts/</code> folder without this one triggers a migration hint at startup.</li>
     </ul>
   </div>
-  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="National Bank of Greece" /><span>Section 04</span></div><span class="pg"></span></div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="BikS2013" /><span>Section 04</span></div><span class="pg"></span></div>
 </section>
 
 <!-- ============================ 37 STT SETTINGS ============================ -->
@@ -917,7 +931,7 @@ open -a /Applications/untype.app
       <tr><td class="k">UNTYPE_QUICK_CLOSE</td><td class="k">--[no-]quick-close</td><td>Submit the latest partial on release instead of waiting; off by default.</td></tr>
     </tbody>
   </table>
-  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="National Bank of Greece" /><span>Section 04</span></div><span class="pg"></span></div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="BikS2013" /><span>Section 04</span></div><span class="pg"></span></div>
 </section>
 
 <!-- ============================ 38 LLM SETTINGS ============================ -->
@@ -941,7 +955,7 @@ open -a /Applications/untype.app
       <tr><td class="k">UNTYPE_LLM_STREAMING</td><td class="k">--[no-]llm-streaming</td><td>Token streaming into the overlay; off by default.</td></tr>
     </tbody>
   </table>
-  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="National Bank of Greece" /><span>Section 04</span></div><span class="pg"></span></div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="BikS2013" /><span>Section 04</span></div><span class="pg"></span></div>
 </section>
 
 <!-- ============================ 39 PROTOCOL SETTINGS ============================ -->
@@ -964,7 +978,7 @@ open -a /Applications/untype.app
       <tr><td class="k">UNTYPE_TRANSLATION_POLICY</td><td class="k">--translation-policy</td><td><code>opposite</code> (default), <code>to-en</code>, <code>to-el</code>.</td></tr>
     </tbody>
   </table>
-  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="National Bank of Greece" /><span>Section 04</span></div><span class="pg"></span></div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="BikS2013" /><span>Section 04</span></div><span class="pg"></span></div>
 </section>
 
 <!-- ============================ 40 PROMPT FILES ============================ -->
@@ -987,7 +1001,7 @@ open -a /Applications/untype.app
     </tbody>
   </table>
   <div class="note" style="bottom:100px">Required files must be non-empty; violations raise typed configuration errors before a session starts. Prompt contents are never logged or persisted anywhere else.</div>
-  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="National Bank of Greece" /><span>Section 04</span></div><span class="pg"></span></div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="BikS2013" /><span>Section 04</span></div><span class="pg"></span></div>
 </section>
 
 <!-- ============================ 41 CUSTOMISING PROMPTS ============================ -->
@@ -1005,7 +1019,7 @@ open -a /Applications/untype.app
     </ul>
   </div>
   <div class="image-right" style="background-image:url('{{PROMPT_WRITING}}')"></div>
-  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="National Bank of Greece" /><span>Section 04</span></div><span class="pg"></span></div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="BikS2013" /><span>Section 04</span></div><span class="pg"></span></div>
 </section>
 
 <!-- ============================ 42 RUNTIME & DIAGNOSTICS ============================ -->
@@ -1032,7 +1046,7 @@ open -a /Applications/untype.app
     <div class="row"><span>Focused-input helper timeout</span><span>10 s</span></div>
   </div>
   <div class="note" style="right:800px">The timings on the right are compiled constants, not settings. They are listed because they explain what an operator sees: a 15 s pinned "finalizing" overlay is a hung LLM call, not a stuck hotkey.</div>
-  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="National Bank of Greece" /><span>Section 04</span></div><span class="pg"></span></div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="BikS2013" /><span>Section 04</span></div><span class="pg"></span></div>
 </section>
 
 <!-- ============================ 43 STATE FILES ============================ -->
@@ -1058,13 +1072,13 @@ open -a /Applications/untype.app
     "protocolMode": "dictation", "translationPolicy": "opposite",
     "llmEnabled": true, "llmProvider": "azure-openai",
     "llmModel": "gpt-5.4", "llmStreaming": false,
-    "hotkeyEnabled": true, "hotkey": "Control+`",
+    "hotkeyEnabled": true, "hotkeyHoldToTalk": true, "hotkey": "Control+`",
     "windowWidth": 1180, "windowHeight": 760,
     "appearance": "system", … },
   <span class="h">"push_to_talk"</span>: { "enabled": true, "hotkey": "Control+`" }
 }</pre>
   <div class="callout">Persisted operator values apply only when the corresponding flag or environment variable is not set. An invalid file is a typed error that names the file to fix or delete, never a silent reset.</div>
-  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="National Bank of Greece" /><span>Section 04</span></div><span class="pg"></span></div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="BikS2013" /><span>Section 04</span></div><span class="pg"></span></div>
 </section>
 
 <!-- ============================ 44 CLI ============================ -->
@@ -1081,7 +1095,7 @@ open -a /Applications/untype.app
 SONIOX_API_KEY=sk_... untype --output-mode append
 untype --stt-provider elevenlabs --elevenlabs-api-key xi_... --language auto
 untype --no-refine --interaction-mode hybrid --protocol-output ./events.jsonl</pre>
-  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="National Bank of Greece" /><span>Section 04</span></div><span class="pg"></span></div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="BikS2013" /><span>Section 04</span></div><span class="pg"></span></div>
 </section>
 
 <!-- ============================ 45 DIVIDER 05 ============================ -->
@@ -1090,7 +1104,7 @@ untype --no-refine --interaction-mode hybrid --protocol-output ./events.jsonl</p
   <div class="num">05</div>
   <div class="label">Operating and troubleshooting</div>
   <div class="cap">The daily loop, what the logs say, the symptoms you will meet, and the rules that keep the two core features intact.</div>
-  <div class="footer"><div class="brand"><img src="{{LOGO_KNOCKOUT}}" alt="National Bank of Greece" /><span>Section 05</span></div><span class="pg"></span></div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_KNOCKOUT}}" alt="BikS2013" /><span>Section 05</span></div><span class="pg"></span></div>
 </section>
 
 <!-- ============================ 46 DAILY WORKFLOW ============================ -->
@@ -1100,12 +1114,12 @@ untype --no-refine --interaction-mode hybrid --protocol-output ./events.jsonl</p
   <div class="rule"></div>
   <div class="grid g4">
     <div class="col"><div class="n">01</div><h3>Focus the target</h3><p>Click into the field of any app. If untype is frontmost, the last external app is re-activated for you before delivery.</p></div>
-    <div class="col"><div class="n">02</div><h3>Hold and speak</h3><p>The overlay shows the live partial and the R/T/C/I state. Press R, T, C or I to flip an operator mid-recording.</p></div>
-    <div class="col"><div class="n">03</div><h3>Release</h3><p>The overlay moves to finalizing; with streaming on you see tokens arrive. The text lands at the caret and the overlay hides.</p></div>
+    <div class="col"><div class="n">02</div><h3>Hold and speak</h3><p>Or press once in push-to-listen mode. The overlay shows the live partial and the R/T/C/I state. Press R, T, C or I to flip an operator mid-recording.</p></div>
+    <div class="col"><div class="n">03</div><h3>Release, or press again</h3><p>The overlay moves to finalizing; with streaming on you see tokens arrive. The text lands at the caret and the overlay hides.</p></div>
     <div class="col"><div class="n">04</div><h3>Use voice commands</h3><p>In agent or hybrid mode, say "command send", "command cancel" or "command status", or the Greek guard phrase.</p></div>
   </div>
   <div class="callout">Quick Close trades accuracy for speed: it submits the latest partial the moment you release. Leave it off when the provider's final punctuation matters, turn it on for short agent commands.</div>
-  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="National Bank of Greece" /><span>Section 05</span></div><span class="pg"></span></div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="BikS2013" /><span>Section 05</span></div><span class="pg"></span></div>
 </section>
 
 <!-- ============================ 47 READING THE LOG ============================ -->
@@ -1127,7 +1141,7 @@ untype --no-refine --interaction-mode hybrid --protocol-output ./events.jsonl</p
       <tr><td class="k">text_source=timeout_fallback_partial</td><td>The provider did not finalize within 1.5 s; the latest partial was used with a warning.</td></tr>
     </tbody>
   </table>
-  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="National Bank of Greece" /><span>Section 05</span></div><span class="pg"></span></div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="BikS2013" /><span>Section 05</span></div><span class="pg"></span></div>
 </section>
 
 <!-- ============================ 48 SYMPTOMS ============================ -->
@@ -1148,7 +1162,7 @@ untype --no-refine --interaction-mode hybrid --protocol-output ./events.jsonl</p
       <tr><td>Notarization <code>status: Invalid</code></td><td>Signing or entitlement problem in the bundle.</td><td><code>xcrun notarytool log &lt;id&gt; --keychain-profile untype-notary</code>.</td></tr>
     </tbody>
   </table>
-  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="National Bank of Greece" /><span>Section 05</span></div><span class="pg"></span></div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="BikS2013" /><span>Section 05</span></div><span class="pg"></span></div>
 </section>
 
 <!-- ============================ 49 GUARDRAILS ============================ -->
@@ -1165,20 +1179,20 @@ untype --no-refine --interaction-mode hybrid --protocol-output ./events.jsonl</p
     <p>Always package with the Developer ID identity and notarize; an unsigned build silently revokes Accessibility.</p>
   </div>
   <div class="image-right" style="background-image:url('{{GUARDRAILS_BRIDGE}}')"></div>
-  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="National Bank of Greece" /><span>Section 05</span></div><span class="pg"></span></div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="BikS2013" /><span>Section 05</span></div><span class="pg"></span></div>
 </section>
 
 <!-- ============================ 50 CLOSING ============================ -->
 <section class="slide divider dark">
   <div class="photo" style="background-image:url('{{CLOSING_ATHENS}}')"></div>
   <div class="num" style="font-size:120px; top:300px">untype</div>
-  <div class="label" style="top:450px; width:640px; font-size:48px; line-height:1.05">Where it stands, and what is next.</div>
+  <div class="label" style="top:450px; bottom:auto; width:640px; font-size:48px; line-height:1.05">Where it stands, and what is next.</div>
   <div class="cap" style="top:590px; width:620px; font-size:19px">
-    Build 7 ships signed and notarized with push-to-talk, focused-input delivery, refinement, translation and streaming in place.<br /><br />
+    Build 13 ships signed and notarized on GitHub Releases and Homebrew, with push-to-talk and push-to-listen, focused-input delivery, refinement, translation, streaming, a credentials editor and a commented <code>.env</code> template.<br /><br />
     Open items: synchronise runtime state across execution contexts, await provider handshakes and trailing finals, reduce UI main-thread writes, complete the visual verification pass, and replace the placeholder bundle id in one deliberate build.<br /><br />
     Docs: <code>docs/design/project-design.md</code>, <code>configuration-guide.md</code>, <code>deployment-guide.md</code>, <code>release-runbook.md</code> and the issue register in <code>Issues - Pending Items.md</code>.
   </div>
-  <div class="footer"><div class="brand"><img src="{{LOGO_KNOCKOUT}}" alt="National Bank of Greece" /><span>untype · technical deck</span></div><span class="pg"></span></div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_KNOCKOUT}}" alt="BikS2013" /><span>untype · technical deck</span></div><span class="pg"></span></div>
 </section>
 </div></div>
 <div id="nav"><button id="prev" title="Previous (←)">‹</button><span class="counter" id="counter"></span><button id="next" title="Next (→)">›</button></div>

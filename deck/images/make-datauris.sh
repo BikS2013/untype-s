@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Converts every generated PNG in deck/images/ to a 1600px-wide JPEG (quality 78) and writes the
-# matching deck/assets/<name>.datauri.txt consumed by the NBG embed-assets.mjs script (token {{NAME}}).
+# matching deck/assets/<name>.datauri.txt consumed by the nbg-design embed-assets.mjs script (token {{NAME}}).
 set -eu
 cd "$(dirname "$0")"
 mkdir -p ../assets

@@ -1,6 +1,6 @@
 # untype technical deck
 
-A 50-slide HTML presentation about untype (what it is, how it works, installation, configuration, operation), built on the NBG design system skill and decorated with photorealistic images generated for this purpose.
+A 51-slide HTML presentation about untype (what it is, how it works, installation, configuration, operation), built with the `nbg-design` skill on its **BikS2013 theme** (ink and copper on warm paper, Avenir Next, the BikS2013 wheel lockups) and decorated with photorealistic images generated for this purpose in the same palette.
 
 **Live deck (HTML):** https://biks2013.github.io/untype-s/ — published automatically by GitHub Pages, see [Publishing](#publishing-github-pages).
 
@@ -15,9 +15,9 @@ A 50-slide HTML presentation about untype (what it is, how it works, installatio
 ## Sources and how to rebuild
 
 - `src/shell-head.html`, `src/slides.html`, `src/shell-tail.html`: the deck source, authored with `{{TOKEN}}` image placeholders.
-- `images/generate-images.sh`: generates the photo set with `image-tool` (Azure OpenAI `gpt-image-2`). Existing PNGs are skipped, so delete a file to regenerate it. Prompts live in the script.
-- `images/make-datauris.sh`: converts every PNG to a 1600 px JPEG and writes `assets/<name>.datauri.txt`, the form the embedder consumes. `assets/logo-*.datauri.txt` are copied from the skill.
-- `build.sh`: concatenates the sources, embeds the assets, inlines the NBG deck menu, runs the strict verifier, writes the rebuild script and exports the PDF. Requires the `nbg-design` plugin (path overridable with `NBG_DESIGN_SKILL`) and Chrome for the PDF.
+- `images/generate-images.sh`: generates the photo set with `image-tool` (Azure OpenAI `gpt-image-2`) in the BikS2013 palette (charcoal ink, copper and amber accents, cream and paper surfaces; nothing teal). Existing PNGs are skipped, so delete a file to regenerate it. Prompts live in the script.
+- `images/make-datauris.sh`: converts every PNG to a 1600 px JPEG and writes `assets/<name>.datauri.txt`, the form the embedder consumes. `assets/logo-*.datauri.txt` are the BikS2013 lockups, copied from the skill's `BikS2013-Design/assets/`.
+- `build.sh`: concatenates the sources, embeds the assets, inlines the deck menu with `--theme biks2013` (copper toolbars, the assistant briefed on the BikS2013 system), runs the strict verifier, writes the rebuild script and exports the PDF. Requires the `nbg-design` plugin 1.20.0 or newer (path overridable with `NBG_DESIGN_SKILL`) and Chrome for the PDF.
 
 ```
 ./images/generate-images.sh   # only when images must be (re)generated

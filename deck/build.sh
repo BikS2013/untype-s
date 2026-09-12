@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 # Builds deck/untype-deck.html from deck/src/*.html, embeds the images (deck/assets/*.datauri.txt),
-# inlines the NBG right-click deck menu, verifies the deck, writes its rebuild script and exports the PDF.
+# inlines the right-click deck menu (BikS2013 theme), verifies the deck, writes its rebuild script and exports the PDF.
 # Usage: ./build.sh [--no-pdf]
 set -euo pipefail
 cd "$(dirname "$0")"
-SK="${NBG_DESIGN_SKILL:-$HOME/.claude/plugins/cache/nbg-design/nbg-design/1.19.0/skills/nbg-design}"
+SK="${NBG_DESIGN_SKILL:-$HOME/.claude/plugins/cache/nbg-design/nbg-design/1.20.0/skills/nbg-design}"
 [ -d "$SK/scripts" ] || { echo "nbg-design skill not found at $SK (set NBG_DESIGN_SKILL)"; exit 1; }
 
 cat src/shell-head.html src/slides.html src/shell-tail.html > untype-deck.src.html
-node "$SK/scripts/embed-assets.mjs" untype-deck.src.html -o untype-deck.html --assets assets
-node "$SK/scripts/add-deck-menu.mjs" untype-deck.html
+node "$SK/scripts/embed-assets.mjs" untype-deck.src.html -o untype-deck.html --theme biks2013 --assets assets
+node "$SK/scripts/add-deck-menu.mjs" untype-deck.html --theme biks2013
 node "$SK/scripts/verify-deck.mjs" untype-deck.html --strict
 if [ "${1:-}" = "--no-pdf" ]; then
   node "$SK/scripts/write-rebuild-script.mjs" untype-deck.html --no-pdf

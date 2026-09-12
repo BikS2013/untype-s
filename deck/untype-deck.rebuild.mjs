@@ -2,7 +2,7 @@
 // untype-deck.rebuild.mjs — rebuild "untype-deck.html" with the current NBG Design editing tools.
 //
 // Written by the nbg-design skill (scripts/write-rebuild-script.mjs) on 2026-09-12,
-// when the deck was delivered with editor block v13 (plugin 1.19.0).
+// when the deck was delivered with editor block v14 (plugin 1.20.0).
 // The deck carries the in-deck editing tools (right-click menu, text and shape toolbars, structure
 // panel, AI assistant, "Export to PDF", "Save edited copy") as one inlined script block. Those tools
 // evolve with the skill; the deck does not. Run this script after the nbg-design skill / plugin was
@@ -19,7 +19,7 @@
 // Where the nbg-design scripts are looked up (highest priority first):
 //   --scripts <dir>             explicit;
 //   NBG_DESIGN_SCRIPTS=<dir>    environment;
-//   the recorded directory      /Users/giorgosmarinos/.claude/plugins/cache/nbg-design/nbg-design/1.19.0/skills/nbg-design/scripts
+//   the recorded directory      /Users/giorgosmarinos/.claude/plugins/cache/nbg-design/nbg-design/1.20.0/skills/nbg-design/scripts
 //                               (where the skill was when the deck was delivered).
 // The directory must hold add-deck-menu.mjs, verify-deck.mjs, export-pdf.mjs and lib/ (the skill's
 // scripts/ folder). Anything else is an error: the script never substitutes another location.
@@ -33,14 +33,16 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { spawnSync } from 'node:child_process';
 
 const RECORD = {
-  "generated": "2026-09-12T04:32:50.030Z",
+  "generated": "2026-09-12T15:27:59.831Z",
   "deck": "untype-deck.html",
   "pdf": "untype-deck.pdf",
-  "scriptsDir": "/Users/giorgosmarinos/.claude/plugins/cache/nbg-design/nbg-design/1.19.0/skills/nbg-design/scripts",
-  "blockVersion": 13,
-  "shippedVersion": 13,
-  "pluginVersion": "1.19.0",
-  "config": null,
+  "scriptsDir": "/Users/giorgosmarinos/.claude/plugins/cache/nbg-design/nbg-design/1.20.0/skills/nbg-design/scripts",
+  "blockVersion": 14,
+  "shippedVersion": 14,
+  "pluginVersion": "1.20.0",
+  "config": {
+    "theme": "biks2013"
+  },
   "exportArgs": []
 };
 
