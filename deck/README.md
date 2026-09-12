@@ -1,6 +1,6 @@
 # untype technical deck
 
-A 51-slide HTML presentation about untype (what it is, how it works, installation, configuration, operation), built with the `nbg-design` skill on its **BikS2013 theme** (ink and copper on warm paper, Avenir Next, the BikS2013 wheel lockups) and decorated with photorealistic images generated for this purpose in the same palette.
+A 53-slide HTML presentation about untype (what it is, how it works, installation, configuration, operation), built with the `nbg-design` skill on its **BikS2013 theme** (ink and copper on warm paper, Avenir Next, the BikS2013 wheel lockups) and decorated with photorealistic images generated for this purpose in the same palette.
 
 **Live deck (HTML):** https://biks2013.github.io/untype-s/ — published automatically by GitHub Pages, see [Publishing](#publishing-github-pages).
 

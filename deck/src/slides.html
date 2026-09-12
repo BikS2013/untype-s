@@ -626,6 +626,34 @@ ln -sf /Applications/untype.app/Contents/MacOS/untype ~/.local/bin/untype</pre>
   <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="BikS2013" /><span>Section 03</span></div><span class="pg"></span></div>
 </section>
 
+<!-- ============================ 31b PERMISSIONS STEP BY STEP ============================ -->
+<section class="slide">
+  <div class="eyebrow">03 · macOS permissions, step by step</div>
+  <div class="title">Where to click in System Settings.</div>
+  <div class="rule"></div>
+  <div class="grid g3" style="gap:32px">
+    <div class="card"><div class="tag">1 · Microphone</div><ul>
+      <li>Click <em>Start Listening</em> (or hold the hotkey) once. macOS asks "untype would like to access the microphone": click <strong>Allow</strong>.</li>
+      <li>No prompt, or <em>Don't Allow</em> clicked earlier? <strong>System Settings › Privacy &amp; Security › Microphone</strong>, switch untype on.</li>
+      <li>untype appears in that list only after it has asked once, so do the first step first.</li>
+    </ul></div>
+    <div class="card ink"><div class="tag">2 · Accessibility</div><ul>
+      <li><strong>System Settings › Privacy &amp; Security › Accessibility</strong>.</li>
+      <li>Click <strong>+</strong> below the list, pick <em>Applications › untype</em>, click <em>Open</em>, make sure the switch next to untype is on. macOS may ask for your password or Touch ID.</li>
+      <li>Quit untype and open it again.</li>
+      <li>Switch on but still "not trusted" (typical after an update changed the signature)? Select untype, click <strong>−</strong>, add it again with <strong>+</strong>, quit and reopen.</li>
+    </ul></div>
+    <div class="card"><div class="tag">3 · Input Monitoring</div><ul>
+      <li>Only if the hotkey does not fire while another app is in front.</li>
+      <li><strong>System Settings › Privacy &amp; Security › Input Monitoring</strong>.</li>
+      <li>Click <strong>+</strong>, pick <em>Applications › untype</em>, click <em>Open</em>, switch it on. An older untype entry there? Remove it with <strong>−</strong> first.</li>
+      <li>Quit untype and open it again.</li>
+    </ul></div>
+  </div>
+  <div class="callout">The welcome screen shows this guide with an <em>Open … settings</em> button per pane and a <em>Re-check status</em> button; the status is read live from macOS. Each pane lists untype only after it has been added there once, and every change needs a quit and relaunch.</div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="BikS2013" /><span>Section 03</span></div><span class="pg"></span></div>
+</section>
+
 <!-- ============================ 32 RECOVERY ============================ -->
 <section class="slide">
   <div class="eyebrow">03 · Recovering lost grants</div>
@@ -647,6 +675,29 @@ open -a /Applications/untype.app
 <span class="c"># hotkey dead after install? remove the stale entry under</span>
 <span class="c"># Input Monitoring, re-add the app, relaunch</span></pre>
   <div class="callout warn"><strong>Never reset Input Monitoring when only Accessibility is broken.</strong> That removes the grant the event tap depends on and breaks push-to-talk, which then needs its own re-grant.</div>
+  <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="BikS2013" /><span>Section 03</span></div><span class="pg"></span></div>
+</section>
+
+<!-- ============================ 32b API KEYS ============================ -->
+<section class="slide">
+  <div class="eyebrow">03 · Provider credentials</div>
+  <div class="title">Setting up the API keys.</div>
+  <div class="rule"></div>
+  <div class="grid g2" style="gap:40px 60px">
+    <div class="card ink"><div class="tag">In the app</div><h3>Welcome screen › <em>Set keys…</em>, or Settings › Session › <em>Edit keys…</em></h3><ul>
+      <li><strong>Speech-to-text, one required:</strong> Soniox API key (the default provider) or ElevenLabs API key (with the provider switched to ElevenLabs).</li>
+      <li><strong>Refinement and translation, only if enabled:</strong> Azure OpenAI API key, endpoint (<code>https://&lt;resource&gt;.openai.azure.com</code>), deployment name and API version, or the Google Gemini API key for the <code>google</code> provider.</li>
+      <li>Secrets are masked; a <em>Show</em> switch reveals them while editing. <em>Save</em> writes only the fields you changed; an emptied field unsets that key.</li>
+      <li>Keys are stored in <code>~/.tool-agents/untype/.env</code>, readable only by you, and never appear in logs or diagnostics.</li>
+    </ul></div>
+    <div class="card"><div class="tag">In the file</div><h3>Edit <code>~/.tool-agents/untype/.env</code> directly</h3><ul>
+      <li>The first session start creates it as a fully commented template: every variable as <code># NAME=</code> with its description, allowed values and default.</li>
+      <li>Remove the leading <code># </code> and fill the value, for example <code>SONIOX_API_KEY=…</code> or <code>AZURE_OPENAI_API_KEY=…</code>; comments and order are preserved, and later duplicates of a key are removed by the editor.</li>
+      <li>Optional expiry dates, <code>SONIOX_API_KEY_EXPIRES_AT</code> and <code>ELEVENLABS_API_KEY_EXPIRES_AT</code>, make the UI warn 14 days before a key expires.</li>
+      <li>The inspector's Credentials group shows each key's name, source tier and expiry, never the value.</li>
+    </ul></div>
+  </div>
+  <div class="callout warn"><strong>Nothing is defaulted.</strong> A required key that is missing everywhere is a configuration error that names the variable and the four places it may be set; the onboarding checklist stays open until a speech-to-text key is present.</div>
   <div class="footer"><div class="brand"><img src="{{LOGO_SMALL}}" alt="BikS2013" /><span>Section 03</span></div><span class="pg"></span></div>
 </section>
 
